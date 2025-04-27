@@ -1,5 +1,5 @@
 let {Router} = require ("express");
-
+const {coursesModel} = require ("../db")
 let courseRouter = Router();
 
 
