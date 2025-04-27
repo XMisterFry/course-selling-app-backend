@@ -14,7 +14,7 @@ app.use ('/api/v1/admin',adminRouter)
 
     async function main() {
         try {
-          await mongoose.connect("mongodb+srv://syedhasanali931:tv3dayvFhF3GzXwY@cluster0.mucrdbx.mongodb.net/course-selling-app");
+          await mongoose.connect("mongodb+srv://<>@cluster0.mucrdbx.mongodb.net/course-selling-app");
           console.log("Connected to MongoDB");
       
           app.listen(3000, () => {
