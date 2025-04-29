@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = mongoose.Types.ObjectId
-mongoose.connect("mongodb+srv://syedhasanali931:tv3dayvFhF3GzXwY@cluster0.mucrdbx.mongodb.net/course-selling-app")
+
 
 
 let UserSchema = new Schema ({
@@ -41,7 +41,7 @@ const coursesModel = mongoose.model ("courses-collection", CoursesSchema)
 const purchasesModel = mongoose.model ("purchases-collection", PurchasesSchema)
 
 
-module.export = {
+module.exports = {
 userModel,
 adminModel,
 coursesModel,

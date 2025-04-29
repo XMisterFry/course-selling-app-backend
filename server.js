@@ -5,7 +5,7 @@ let app = express();
 const {userRouter} = require ("./routes/user");
 const {courseRouter} = require("./routes/courses");
 const {adminRouter} = require ("./routes/admin");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 
 app.use ('/api/v1/user',userRouter)
@@ -14,7 +14,7 @@ app.use ('/api/v1/admin',adminRouter)
 
     async function main() {
         try {
-          await mongoose.connect("mongodb+srv://<>@cluster0.mucrdbx.mongodb.net/course-selling-app");
+          await mongoose.connect("");
           console.log("Connected to MongoDB");
       
           app.listen(3000, () => {
