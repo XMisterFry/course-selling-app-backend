@@ -3,7 +3,7 @@ const express = require ("express");
 const  {userModel,purchasesModel} = require ("../db");
 let userRouter = Router();
 let jwt = require ('jsonwebtoken');
-const JWT_SECRET = "qwerTYuiop"
+const {JWT_SECRET_USER} = require ("../config")
 userRouter.use(express.json());
 
 userRouter.post ('/signup', async (req,res)=> {
@@ -61,7 +61,7 @@ if (!targetUser.password == reqPassword ) {
 else {
     let userToken = jwt.sign ({
         id : targetUser._id
-    },JWT_SECRET)
+    },JWT_SECRET_USER)
 
     res.json ({
         token : userToken
@@ -75,7 +75,7 @@ else {
 
 let auth = (req,res,next) => {
 const token = req.headers.token
-const decodedData = jwt.verify(token, JWT_SECRET)
+const decodedData = jwt.verify(token, JWT_SECRET_USER)
 if (decodedData) {
 req.user.id = decodedData.id
 next ();
@@ -89,13 +89,20 @@ else {
 }
 
 
-userRouter.get ('/my-purchases', auth, (req,res)=> {
+userRouter.get ('/my-purchases', auth, async (req,res)=> {
+    let userId = req.user.id
     
+
+    const myPurchases = await purchasesModel.find({
+        userId
+
+    })
+
 res.json({
-    msg : "these are your purchases"
+    myPurchases
 })
 
     
 })
 
-module.exports={userRouter}
+module.exports={userRouter, auth}
